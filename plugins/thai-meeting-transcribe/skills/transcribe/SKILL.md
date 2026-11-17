@@ -1,5 +1,5 @@
 ---
-name: transcribe-meeting
+name: transcribe
 description: Transcribe a meeting recording (audio or video, Thai by default) to a timestamped .txt file locally with Whisper, then write Thai meeting minutes from it. Use when the user asks to ถอดเสียง, ถอดความ, สรุปประชุม/ทำรายงานการประชุมจากไฟล์เสียงหรือวิดีโอ, or to transcribe/summarize an audio or video file (mp3, m4a, wav, mp4, mov, webm, ...).
 argument-hint: <path to audio/video file> [--model small|medium|large-v3-turbo]
 ---

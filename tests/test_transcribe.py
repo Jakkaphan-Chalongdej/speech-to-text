@@ -9,7 +9,7 @@ from pathlib import Path
 
 SCRIPT = (
     Path(__file__).resolve().parents[1]
-    / "plugins/thai-meeting-transcribe/skills/transcribe-meeting/scripts/transcribe.py"
+    / "plugins/thai-meeting-transcribe/skills/transcribe/scripts/transcribe.py"
 )
 spec = importlib.util.spec_from_file_location("transcribe", SCRIPT)
 t = importlib.util.module_from_spec(spec)

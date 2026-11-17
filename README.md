@@ -49,7 +49,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 หรือเรียกคำสั่งตรงๆ:
 
 ```
-/thai-meeting-transcribe:transcribe-meeting ~/Downloads/ประชุมทีม.mp4
+/thai-meeting-transcribe:transcribe ~/Downloads/ประชุมทีม.mp4
 ```
 
 รองรับไฟล์ทั่วไป เช่น mp3, m4a, wav, mp4, mov, webm
@@ -77,9 +77,9 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 .claude-plugin/marketplace.json                    # ทำให้ repo นี้เป็น marketplace
 plugins/thai-meeting-transcribe/
   .claude-plugin/plugin.json
-  skills/transcribe-meeting/SKILL.md               # ขั้นตอนที่ Claude ทำตาม
-  skills/transcribe-meeting/scripts/transcribe.py  # สคริปต์ถอดเสียง (รันด้วย uv run)
-  skills/transcribe-meeting/references/summary-template.md
+  skills/transcribe/SKILL.md                       # ขั้นตอนที่ Claude ทำตาม
+  skills/transcribe/scripts/transcribe.py          # สคริปต์ถอดเสียง (รันด้วย uv run)
+  skills/transcribe/references/summary-template.md
 tests/test_transcribe.py
 ```
 
@@ -92,5 +92,5 @@ uv run --no-project --python 3.12 --with pytest --with faster-whisper --with "av
 ทดสอบสคริปต์ตรงๆ:
 
 ```bash
-uv run plugins/thai-meeting-transcribe/skills/transcribe-meeting/scripts/transcribe.py ไฟล์เสียง.m4a --model small
+uv run plugins/thai-meeting-transcribe/skills/transcribe/scripts/transcribe.py ไฟล์เสียง.m4a --model small
 ```
