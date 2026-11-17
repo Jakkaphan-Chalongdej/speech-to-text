@@ -9,7 +9,17 @@
 (Whisper ที่ฝึกเพิ่มสำหรับภาษาไทย) ผ่าน faster-whisper **เสียงประชุมไม่ถูกส่งออกไปภายนอก** ไม่ต้องใช้ API key และไม่มีค่าใช้จ่าย
 (ข้อความถอดเสียงจะถูกส่งให้ Claude อ่านเพื่อทำสรุปตามปกติของ Claude Code)
 
-ใช้ได้ทั้ง macOS และ Windows
+ใช้ได้กับ:
+
+| ระบบ | รองรับ |
+|---|---|
+| macOS ชิป M (Apple Silicon) | ✅ ทดสอบแล้ว ใช้ GPU ของ Mac ให้อัตโนมัติ |
+| macOS ชิป Intel | ✅ (ยังไม่ได้ทดสอบ) |
+| Windows ที่เป็น Intel / AMD (เครื่องส่วนใหญ่) | ✅ (ยังไม่ได้ทดสอบบนเครื่องจริง) |
+| **Windows ARM** เช่น ชิป Snapdragon / Copilot+ PC | ❌ ยังไม่รองรับ เพราะ ctranslate2 ไม่มีเวอร์ชัน Windows ARM ปลั๊กอินจะแจ้งก่อนติดตั้งอะไร |
+
+ดูว่าเครื่อง Windows เป็นแบบไหน: Settings → System → About → System type
+ถ้าเขียนว่า "ARM-based processor" แปลว่าเป็น Windows ARM
 
 ## ติดตั้ง
 
@@ -83,7 +93,9 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 | whisper large-v3-turbo (OpenAI) | 181 วิ | คำไทยผิดเยอะ มีภาษาอื่นปน |
 
 CPU 10 threads ช้ากว่า 4 threads (268 vs 250 วิ) เพราะ efficiency core ถ่วง จึงใช้เฉพาะ performance core
-- Windows: ยังไม่ได้ทดสอบบนเครื่องจริง (best effort) ถ้าเจอปัญหา แจ้งพร้อมข้อความ error ได้เลย
+- Windows x64: ยังไม่ได้ทดสอบบนเครื่องจริง (best effort) ตรวจแล้วว่าทุกไลบรารีมีเวอร์ชันสำเร็จรูปสำหรับ Windows x64
+  เครื่องที่ไม่มีการ์ดจอ NVIDIA อาจใช้เวลาถอดนานกว่าความยาวเสียง ถ้าเจอปัญหา แจ้งพร้อมข้อความ error ได้เลย
+- Windows ARM: ไม่รองรับ (ctranslate2 ไม่มี wheel สำหรับ `win_arm64`)
 
 ## สำหรับผู้พัฒนา
 

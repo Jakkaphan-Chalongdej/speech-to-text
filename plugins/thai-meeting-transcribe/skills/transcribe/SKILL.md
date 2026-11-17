@@ -22,6 +22,28 @@ Talk to the user in Thai unless they write in another language.
 - Outputs go next to the input: `<name>.txt` (transcript) and `<name>.summary.md` (minutes).
   The script also keeps `<name>.transcribe.json` as resume state.
 
+## 1b. Check the machine is supported (Windows only)
+
+Check this before installing anything. If `uname -s` starts with `MINGW`, `MSYS` or `CYGWIN`,
+the machine runs Windows. Then check the OS architecture:
+
+```bash
+powershell -NoProfile -Command "[System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture"
+```
+
+If it prints `Arm64`, **stop here and do not install anything**. Tell the user in Thai:
+
+> เครื่องนี้เป็น Windows ARM (เช่น ชิป Snapdragon) ซึ่งปลั๊กอินยังไม่รองรับ
+> เพราะ ctranslate2 ซึ่งเป็นตัวประมวลผลที่ใช้ถอดเสียง ยังไม่มีเวอร์ชันสำหรับ Windows ARM
+> ใช้ได้บน Windows ที่เป็น Intel/AMD และบน Mac
+
+(This Windows ARM machine, e.g. with a Snapdragon chip, isn't supported yet, because ctranslate2,
+the engine that does the transcription, has no Windows ARM build. The plugin works on Intel/AMD
+Windows and on Mac.)
+
+This check reads the OS architecture, not the shell's, so it is still correct when Git Bash
+runs under x64 emulation. Any other result (`X64`) is supported, so continue.
+
 ## 2. Make sure `uv` is available (install it if needed)
 
 `uv` runs the script and sets up Python and every library on its own. Find it in this order,
@@ -86,6 +108,8 @@ asks how it is going, read the tail of the task output: progress lines look like
     to choose another name (`--output`) or overwrite it (`--force`). Never pick `--force` yourself.
   - The transcript was started with a different model. Ask the user whether to resume
     with the original model or start over with `--force`.
+- An install error that mentions `ctranslate2` and `win_arm64` (or another platform tag) means
+  the machine isn't supported. Explain it as in step 1b instead of showing the raw error.
 - Other errors: show the user the last lines of the output and explain them in plain words.
 
 ## 4. Write the meeting minutes
