@@ -141,3 +141,18 @@ Written next to the source file (my call — keeps results with the recording):
 - **Windows**: best effort; not yet tested on a real machine.
 - **PyAV pinned `<19`**: PyAV 19 removed `open(metadata_errors=...)`, which faster-whisper 1.2.x
   still passes.
+
+## v0.2.0 changes (2026-11-18), from testing on a real 36-minute Thai meeting
+
+- **Default model is Typhoon Whisper Turbo** (`sub247/typhoon-whisper-turbo-ct2`, pinned
+  commit), a CTranslate2 conversion of `typhoon-ai/typhoon-whisper-turbo` (MIT). It ran at the
+  same speed as `large-v3-turbo` with far better Thai.
+- **15-second speech windows** come from VAD and are passed as `clip_timestamps`. Thai
+  fine-tunes don't emit timestamps, so with 30-second windows they hit the per-window token
+  limit and dropped almost half the text (1,739 → 3,296 Thai chars on the same clip).
+- **Output filters**: Hangul, CJK, Cyrillic and other scripts are stripped from Thai output,
+  and a word or phrase repeated 3+ times in a row collapses to one copy. Lines with no
+  content left are dropped. `--no-filter` turns this off.
+- **Devices**: auto mode tries CUDA, then MPS on Apple Silicon (about 1.4× faster than CPU on
+  an M5), then CPU. CPU threads default to the performance cores: on an M5, 10 threads were
+  slower than 4.

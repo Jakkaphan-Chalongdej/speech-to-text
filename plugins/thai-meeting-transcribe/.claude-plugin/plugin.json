@@ -1,6 +1,6 @@
 {
   "name": "thai-meeting-transcribe",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "ถอดเสียงประชุมภาษาไทยจากไฟล์เสียง/วิดีโอบนเครื่องตัวเอง (Whisper) เป็นไฟล์ .txt พร้อมเวลา แล้วให้ Claude ทำสรุปการประชุม",
   "keywords": ["transcribe", "speech-to-text", "whisper", "thai", "meeting-minutes"]
 }

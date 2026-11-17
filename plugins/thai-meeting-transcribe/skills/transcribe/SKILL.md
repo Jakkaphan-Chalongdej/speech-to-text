@@ -55,13 +55,23 @@ UV run "SCRIPT" "<input file>"
 
 (Here `UV` is either `uv` or `"$HOME/.local/bin/uv"`, whichever step 2 found.)
 
-Optional flags: `--model medium` or `--model small` (faster, less accurate),
-`--output <path.txt>`, `--device cpu`, and `--force` (start over and discard the existing transcript).
+The default model is Typhoon Whisper Turbo, a Thai fine-tune. It was far more accurate on
+real Thai meetings than plain Whisper at the same speed. The device is picked automatically:
+NVIDIA GPU, then the Apple GPU on Apple Silicon Macs, then CPU.
+
+Optional flags:
+- `--model large-v3-turbo` for plain Whisper. Use it only if the meeting is mostly not in Thai,
+  and pass `--language` too.
+- `--output <path.txt>`
+- `--device cpu` if the GPU causes problems.
+- `--force` starts over and discards the existing transcript.
 
 Before you wait, tell the user what to expect:
 - The first run downloads Python packages and the model (about 1.6 GB), which takes a few minutes.
-- Mac, or a PC without an NVIDIA GPU: roughly 10–20 minutes per hour of audio
-  with the default model. Slow laptops take longer. A PC with a working NVIDIA GPU is much faster.
+- Time per hour of audio, roughly:
+  - Apple Silicon Mac: about 30 minutes.
+  - PC without an NVIDIA GPU: 30–60 minutes or more.
+  - PC with a working NVIDIA GPU: much faster.
 - If the run gets interrupted, running the same command again resumes where it stopped.
 
 Then wait for the background-task notification. Don't poll in a loop. If the user
@@ -90,6 +100,7 @@ Read the transcript. Each line is `[HH:MM:SS] text`.
 
 Rules:
 - Use only what the transcript says. Never invent names, numbers, decisions or deadlines.
+- Lines can be up to about 15 seconds of speech, so a timestamp marks where that stretch starts.
 - Whisper mis-hears names and technical terms. Fix one only when the context makes the
   intended word clear. Otherwise keep it, and mark it `(?)` if it matters.
 - Leave out obvious transcription junk, such as repeated phrases or text that appears during silence.
