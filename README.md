@@ -15,7 +15,7 @@
 พิมพ์ใน Claude Code:
 
 ```
-/plugin marketplace add <ลิงก์ GitHub ของ repo นี้ เช่น your-name/speech-to-text>
+/plugin marketplace add Jakkaphan-Chalongdej/speech-to-text
 /plugin install thai-meeting-transcribe@speech-to-text
 ```
 
