@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 .DS_Store
 
-# Local test recordings and outputs
+# Local test recordings and outputs (never publish meeting audio or transcripts)
+example/
 *.transcribe.json
 *.transcribe.json.tmp
