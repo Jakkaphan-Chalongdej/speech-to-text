@@ -1,0 +1,15 @@
+{
+  "name": "speech-to-text",
+  "owner": {
+    "name": "speech-to-text maintainers"
+  },
+  "description": "ปลั๊กอินถอดเสียงประชุมภาษาไทยสำหรับ Claude Code",
+  "plugins": [
+    {
+      "name": "thai-meeting-transcribe",
+      "source": "./plugins/thai-meeting-transcribe",
+      "description": "ถอดเสียงประชุมภาษาไทยจากไฟล์เสียง/วิดีโอบนเครื่องตัวเอง แล้วสรุปการประชุม",
+      "version": "0.1.0"
+    }
+  ]
+}
